@@ -1,0 +1,43 @@
+{include file="header"}
+	
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+					<ul class="list">
+						{volist name="cate.child" id="v"}
+						<li>
+							<a href="/news_detail?aid={$v.aid}" target="_blank">
+								<div class="img_com" >
+									<img src="{$v.litpic}" style="height: 160px">
+								</div>
+								<div class="news_com">
+									<p class="tit">{$v.title}</p>
+									<span class="time">{:date('Y-m-d',$v.add_time)}</span>
+									<div class="introd">
+										{:mb_substr(strip_tags(htmlspecialchars_decode($v.content)),0,160)}
+									</div>
+								</div>
+							</a>
+						</li>
+						{/volist}
+						
+					</ul>
+					<!-- 分页 -->
+					<div class="page">
+						{$cate['child']->render()}
+					</div>
+				</div>
+			</div>
+		</div>
+<style type="text/css">
+
+</style>
+		
+		<!-- 底部 -->
+		{include file="footer"}

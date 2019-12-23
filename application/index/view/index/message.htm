@@ -1,0 +1,62 @@
+{include file="header"}
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content message">
+					<form class="mess_form">
+						<div class="">
+							<input type="text" placeholder="姓名" name="username" value="" />
+						</div>
+						<div class="">
+							<input type="text" placeholder="电话" name="mobile" value="" />
+						</div>
+						<div class="">
+							<input type="text" placeholder="邮箱" name="email" value="" />
+						</div>
+						<div class="">
+							<textarea placeholder="留言内容" name="content"></textarea>
+						</div>
+						<input type="hidden" name="__token__" id="token" value="{$Request.token}">
+						<div class="btn">
+							<input type="submit" id="submit" value="提交" />
+							<input type="reset" id="reset" value="重置" />
+						</div>
+						
+					</form>
+<!-- 					<div class="dl_contact">
+						<div class="tit">{$dailiData.title}</div>
+						<div class="con">{:htmlspecialchars_decode($dailiData.content)}</div>
+					</div> -->
+						
+
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/public/plugins/layer-v3.1.0/layer.js"></script>
+		<script type="text/javascript">
+			$('#submit').click(function(){
+				var data = $('.mess_form').serialize();
+					
+				$.post('{:url("index/Lists/gbook_submit")}',data,function(data){
+					if(data.code == 1){
+						layer.msg(data.msg,{icon:1,time:1000});
+						$('#reset').click();
+					}else{
+						$('#token').val(data.token);
+						layer.msg(data.msg,{icon:5,time:1000});
+					}
+
+				})
+
+				return false;
+
+			})
+
+		</script>
+		<!-- 底部 -->
+		{include file="footer"}

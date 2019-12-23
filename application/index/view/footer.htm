@@ -1,0 +1,32 @@
+<footer>
+<div class="wrap">
+	<div class="links">
+		<span>友情连接：</span>
+		{volist name="$linkData" id="v"}
+		<a href="{$v.url}" {if condition="$v.target == 1"}target="_blank"{/if} title="{$v.title}">{$v.title}</a>
+		{/volist}
+	</div>
+	<p>Copyright &copy; {$web_config.web_copyright} 版权所有</p>
+</div>
+</footer>
+
+<script src="__INDEX__/js/public.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).keyup(function(event){
+	  if(event.keyCode ==13){
+	    	
+	    	var key = $('#key').val();
+	    	if(key == ''){
+	    		layer.msg('请输入关键字',{icon:5,time:1000});return false;
+	    	}
+
+	    	window.location.href="/searchs?key="+key;
+
+
+	  }
+	});
+
+
+</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>jQuery无缝滚动插件liMarquee演示-图片演示_dowebok</title>
+<link rel="stylesheet" href="css/liMarquee.css">
+<style>
+.wrap { padding: 10px;}
+.dowebok { width: 790px; margin: 100px auto; font-size: 0;}
+.dowebok img { margin-left: 10px; vertical-align: top;}
+</style>
+</head>
+
+<body>
+<h1>图片演示</h1>
+
+<div class="dowebok">
+	<img src="images/1.jpg" alt="最佳前男友">
+	<img src="images/2.jpg" alt="花千骨">
+	<img src="images/3.jpg" alt="克拉恋人">
+	<img src="images/4.jpg" alt="神犬小七">
+	<img src="images/5.jpg" alt="秀才遇到兵">
+	<img src="images/6.jpg" alt="暗黑者2">
+	<img src="images/7.jpg" alt="二胎时代">
+	<img src="images/8.jpg" alt="鸳鸯佩">
+	<img src="images/9.jpg" alt="少年神探狄仁杰">
+	<img src="images/10.jpg" alt="华胥引">
+</div>
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.liMarquee.js"></script>
+<script>
+$(function(){
+	$('.dowebok').liMarquee();
+});
+</script>

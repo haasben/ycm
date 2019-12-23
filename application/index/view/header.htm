@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>{$cate.seo_title}</title>
+		<meta name="keywords" content="{$cate.seo_keywords}" />
+		<meta name="description" content="{$cate.seo_description}" />
+		<link rel="shortcut icon" href="{$web_config.web_ico}" />
+
+		<link rel="stylesheet" type="text/css" href="__INDEX__/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/css/public.css"/>
+		<script src="__INDEX__/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- 头部 -->
+		<header>
+			<div class="wrap">
+				<div class="logo">
+					<a href="/"><img src="{$web_config.web_logo}" ></a>
+				</div>
+				<div class="search">
+					<input type="search" placeholder="请输入关键字" id="key" lang="zh-CN">
+				</div>
+				<div class="tel">
+					<span>咨询热线</span>
+					<span>{$web_config.web_attr_1}</span>
+				</div>
+			</div>
+
+			<!-- 移动端头部 -->
+			<div class="mobile_header">
+				<div class="wrap">
+					<div class="logo">
+						<a href="/"><img src="{$web_config.web_attr_13}" ></a>
+					</div>
+					<div class="menu">导航</div>
+				</div>
+				<div class="nav">
+					<ul>
+						<li><a href="/">网站首页</a></li>
+						{volist name="$cats" id="v"}
+						{notempty name="$v.child"}
+							 <li class="par">
+						       <a href="javascript:" data-src=''>{$v.typename}</a>
+							       <ul class="children">
+							        <li><a href="{if condition='$v.is_part == 0'}/{$v.dirname}?id={$v.id}{else}{$v.typelink}{/if}">{$v.typename}</a></li>
+							        {volist name="$v.child" id="c"}
+							        <li><a href="{if condition='$c.is_part == 0'}/{$c.dirname}?id={$c.id}{else}{$c.typelink}{/if}">{$c.typename}</a></li>
+							         {/volist}
+							       </ul>
+						      </li>
+
+						{else}
+							<li><a href="{if condition='$v.is_part == 0'}/{$v.dirname}?id={$v.id}{else}{$v.typelink}{/if}">{$v.typename}</a>
+							</li>
+						{/notempty}
+						{/volist}
+					</ul>
+				</div>
+			</div>
+		</header>
+		
+		<!-- 导航 -->
+		<nav>
+			<ul>
+				<li><a href="/">网站首页</a></li>
+				{volist name="$cats" id="v"}
+					<li><a href="{if condition='$v.is_part == 0'}/{$v.dirname}?id={$v.id}{else}{$v.typelink}{/if}">{$v.typename}</a>
+						{notempty name="$v.child"}
+						<ul class="children">
+							{volist name="$v.child" id="c"}
+					       <li><a href="{if condition='$c.is_part == 0'}/{$c.dirname}?id={$c.id}{else}{$c.typelink}{/if}">{$c.typename}</a></li>
+					       {/volist}
+					     </ul>
+					    {/notempty}
+					</li>
+				{/volist}
+			</ul>
+		</nav>
+		
+		<div class="container">
+		<div class="banners" style="background-image: url({$cate.litpic});">
+		</div>

@@ -1,0 +1,38 @@
+{include file="header"}
+		
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+					<div class="">
+						
+					</div>
+					<ul class="team_list">
+						{volist name="$cate.child" id="v"}
+						<li>
+							<a href="team_show?aid={$v.aid}">
+								<div class="img_box" style="background-image: url({$v.litpic});">
+									<!-- <img src="img/team1.png" > -->
+								</div>
+								<div class="info">
+									<p class="name">{$v.title}</p>
+									<p class="job">{$v.subtitle}</p>
+									<p class="intro">
+										{:mb_substr(strip_tags(htmlspecialchars_decode($v.content)),0,160)}
+									</p>
+									<span class="more">了解更多&nbsp;> </span>
+								</div>
+							</a>
+						</li>
+						{/volist}
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		{include file="footer"}

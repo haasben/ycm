@@ -1,0 +1,39 @@
+{include file="header"}
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>搜索页</h3>
+					<p>当前位置：
+						<a href="/">首页</a>&nbsp;>&nbsp;<span>搜索<em>{$keywords}</em>的内容</span>
+					</p>
+				</div>
+				<div class="content">
+					<ul class="search_list">
+						{volist name="$data" id="v"}
+						<li>
+							<a href="/news_detail?aid={$v.aid}">
+								<p>{$v.title}</p>
+								<span>{:date('Y-m-d',$v.add_time)}</span>
+							</a>
+						</li>
+						{/volist}
+
+					</ul>
+					<!-- 分页 -->
+					<div class="page">
+						{$data->render()}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		{include file="footer"}
+		<script type="text/javascript">
+			$(function(){
+
+				$(".banners").css("background-image", "url(/uploads/allimg/20191127/1-19112G6225J48.jpg)");
+
+
+			})
+
+		</script>

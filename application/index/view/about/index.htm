@@ -1,0 +1,28 @@
+{include file="header"}
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+					<h3 style="margin-bottom: 0px">{$cate.child.title}</h3>
+					<p style="text-align: center;font-size: 19px;margin-bottom: 25px;line-height: 40px;">{$cate.child.subtitle}</p>
+
+					<div class="desc">
+						<img src="{$cate.child.litpic}" >
+						
+						{:htmlspecialchars_decode($cate.child.content)}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<!-- 底部 -->
+		{include file="footer"}

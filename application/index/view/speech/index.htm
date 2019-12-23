@@ -1,0 +1,23 @@
+{include file="header"}
+		
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+	
+					<div class="desc">
+						{:htmlspecialchars_decode($cate.child.content)}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		{include file="footer"}

@@ -1,0 +1,41 @@
+{include file="header"}
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+					<ul class="product_list" id="prod1" >
+						{volist name="$cate.child" id="c"}
+						<li>
+							<a href="/product_show?aid={$c.aid}">
+								<div class="img_box">
+									<img src="{$c.litpic}" >
+								</div>
+								<div class="tit">{$c.title}</div>
+								<p class="desc">
+									{:mb_substr(strip_tags(htmlspecialchars_decode($c.content)),0,160)}
+								</p>
+							</a>
+						</li>
+						{/volist}
+
+					</ul>
+		
+				</div>
+			</div>
+		</div>
+		
+{include file="footer"}
+		<script type="text/javascript">
+			$('.tabs').on('click','a', function(){
+				const id = $(this).attr('data-id');
+				$(this).addClass('on').siblings().removeClass('on');
+				$('.product_list').hide();
+				$('#prod'+id).show();
+			})
+		</script>
+

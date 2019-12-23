@@ -1,0 +1,28 @@
+{include file="header"}
+		
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<a href="/product?id={$cate.id}">{$cate.typename}</a>
+					</p>
+				</div>
+				<div class="content">
+					<div class="show">
+						<div class="img">
+							<img src="{$cate.pic}" >
+						</div>
+						<div class="show_intro">
+							<p class="name">{$cate.title}</p>
+							<div class="detail">
+								{:htmlspecialchars_decode($cate.content)}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 底部 -->
+		{include file="footer"}

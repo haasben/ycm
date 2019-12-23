@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>{$web_config.web_name}</title>
+		<meta name="keywords" content="{$web_config.web_keywords}" />
+		<meta name="description" content="{$web_config.web_description}" />
+		<link rel="shortcut icon" href="{$web_config.web_ico}" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/js/swiper/css/swiper.min.css"/>
+	</head>
+	<body>
+		<header>
+			<div class="wrap">
+				<div class="logo">
+					<a href="./"><img src="{$web_config.web_logo}" ></a>
+				</div>
+				<div class="search">
+					<input type="search" placeholder="请输入关键字" id="key" lang="zh-CN">
+				</div>
+				<div class="tel">
+					<span>咨询热线</span>
+					<span>{$web_config.web_attr_1}</span>
+				</div>
+			</div>
+			<!-- 移动端头部 -->
+			<div class="mobile_header">
+				<div class="wrap">
+					<div class="logo">
+						<a href="./"><img src="{$web_config.web_attr_13}" ></a>
+					</div>
+					<div class="menu">导航</div>
+				</div>
+				<div class="nav">
+					<ul>
+						<li><a href="/">网站首页</a></li>
+						{volist name="$cats" id="v"}
+						{notempty name="$v.child"}
+							 <li class="par">
+						       <a href="javascript:" data-src=''>{$v.typename}</a>
+							       <ul class="children">
+							        <li><a href="{if condition='$v.is_part == 0'}/{$v.dirname}?id={$v.id}{else}{$v.typelink}{/if}">{$v.typename}</a></li>
+							        {volist name="$v.child" id="c"}
+							        <li><a href="{if condition='$c.is_part == 0'}/{$c.dirname}?id={$c.id}{else}{$c.typelink}{/if}">{$c.typename}</a></li>
+							         {/volist}
+							       </ul>
+						      </li>
+
+						{else}
+							<li><a href="{if condition='$v.is_part == 0'}/{$v.dirname}?id={$v.id}{else}{$v.typelink}{/if}">{$v.typename}</a>
+							</li>
+						{/notempty}
+						{/volist}
+					</ul>
+				</div>
+			</div>
+		</header>
+		
+		<div class="banner">
+			<div class="swiper-container swiper">
+				<div class="swiper-wrapper">
+					{notempty name="$data.banner"}
+					
+					{volist name="$data.banner" id="v"}
+						{if condition='$v.pid == 1'}
+						<div class="swiper-slide" style="background: url({$v.litpic}) no-repeat center;background-size: cover;"></div>
+						{/if}
+					{/volist}
+					
+					{/notempty}
+				</div>
+				<!-- 如果需要分页器 -->
+				<div class="swiper-pagination"></div>
+				
+				<!-- 如果需要导航按钮 -->
+				<!-- <div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div> -->
+			</div>
+			<!-- 导航 -->
+			<div class="nav">
+				<ul>
+					<li><a href="./">网站首页</a></li>
+					{volist name="$cats" id="v"}
+					<li><a href="{if condition='$v.is_part == 0'}/{$v.dirname}?id={$v.id}{else}{$v.typelink}{/if}">{$v.typename}</a></li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+		<!-- 移动端轮播 -->
+		<div class="mobile_banner">
+			<div class="swiper-container mobile_swiper">
+				<div class="swiper-wrapper">
+					{notempty name="$data.banner"}
+					
+						{volist name="$data.banner" id="v"}
+							{if condition='$v.pid == 3'}
+							<div class="swiper-slide">
+							<a href="{$v.links}" {if condition="$v.target == 1"}target="_blank"{/if}  style="background-image: url({$v.litpic});"></a>
+							</div>
+							{/if}
+						{/volist}
+					
+					{/notempty}
+				</div>
+				<!-- 如果需要分页器 -->
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+		<!-- 内容主体 -->
+		<div class="container">
+			<div class="inner">
+				<!-- 关于我们 -->
+				<div class="about wrap">
+					{notempty name="$data.about"}
+					<div class="title">
+						<h3>关于我们</h3>
+						<span>About</span>
+						<p>{$data.about.seo_description}</p>
+					</div>
+					<div class="box">
+						<div class="left" style="text-align: center;">
+							<img src="{$data.about.litpic}" >
+						</div>
+						<div class="right">
+							<h4>{$data.about.title}</h4>
+							<span>{$data.about.subtitle}</span>
+							<div class="desc">
+								{:strip_tags(htmlspecialchars_decode($data.about.content))}
+							</div>
+							<div class="more">
+								<a href="/about?id={$data.about.typeid}" class="">查看更多</a>
+							</div>
+						</div>
+					</div>
+					{/notempty}
+				</div>
+				
+				<!-- 产品介绍 -->
+				<div class="product wrap">
+					<div class="title">
+						<h3>产品介绍</h3>
+						<span>Product</span>
+						<ul class="tab">
+							{volist name="$data.product_cat" id="v"}
+							<li><a href="{$v.id}">{$v.typename}</a></li>
+
+							{/volist}
+						</ul>
+					</div>
+					<ul class="box cont">
+						{volist name="$data.product_list" id="v"}
+						<li>
+							<a href="/product_show?aid={$v.aid}">
+					
+								<div class="img" style="background-image: url({$v.litpic});"></div>
+								<div class="tit">{$v.title}</div>
+								<div class="desc">
+									{:strip_tags(htmlspecialchars_decode($v.content))}
+								</div>
+							</a>
+							<a href="javascript:" class="mo">了解详情> </a>
+						</li>
+						{/volist}
+					</ul>
+				</div>
+
+				<!-- 专家团队 -->
+				<div class="team wrap">
+					<div class="title">
+						<h3>专家团队</h3>
+						<span>Exeprt Team</span>
+					</div>
+					<ul class="box cont">
+						{volist name="$data.team_list" id="v"}
+						<li>
+							<a href="/team_show?aid={$v.aid}">
+								<div class="pic" style="background-image: url({$v.litpic});"></div>
+							
+								<div class="intro">
+									<p class="name">{$v.title}</p>
+									<p class="job">{$v.subtitle}</p>
+									<p class="brief">
+										{:strip_tags(htmlspecialchars_decode($v.content))}
+									</p>
+									<em>了解更多> </em>
+								</div>
+							</a>
+						</li>
+						{/volist}
+					</ul>
+				</div>
+				
+				<!-- 新闻动态 -->
+				<div class="news wrap">
+					<div class="title">
+						<h3>新闻动态</h3>
+						<span>News</span>
+					</div>
+					<div class="box">
+						{notempty name="$data.headNews"}
+						<div class="case">
+							<a href="/news_detail?aid={$data.headNews.aid}"><img src="{$data.headNews.litpic}" ></a>
+							<p class="title">{$data.headNews.title}</p>
+							<p class="time">{:date('Y-m-d',$data.headNews.add_time)}</p>
+					<!-- 		<p class="out">4月14日，积极分子走进开封市晋安路温馨...</p> -->
+						</div>
+						{/notempty}
+						<ul class="lists">
+							{volist name="$data.news" id="v"}
+							<li>
+								<a href="/news_detail?aid={$v.aid}">
+									<span>{:date('Y-m-d',$v.add_time)}</span>
+									<p>{$v.title}</p>
+								</a>
+							</li>
+							{/volist}
+						</ul>
+					</div>
+				</div>
+				
+				<!-- 联系我们 -->
+				<div class="contact wrap">
+					<div class="title">
+						<h3>联系我们</h3>
+						<span>Contact Us</span>
+					</div>
+					<div class="box">
+						{:htmlspecialchars_decode($data.contact.content)}
+						<div class="qrcode box1">
+							<img src="{$web_config.web_attr_15}" >
+						</div>
+						<div class="message box1">
+							<form id="message">
+								<div class="">
+									<input type="text" name="username" value="" placeholder="姓名" />
+									<input type="text" name="mobile" value="" placeholder="电话" />
+								</div>
+								<div class="">
+									<input type="text" name="email" value="" placeholder="邮箱" />
+								</div>
+								<div class="">
+									<textarea rows="" name="content" cols="" placeholder="留言内容"></textarea>
+								</div>
+								<input type="hidden" name="__token__" id="token" value="{$Request.token}">
+								<input type="submit" class="submit" value="提交"/>
+							</form>
+						</div>
+						<script type="text/javascript" src="__INDEX__/js/jquery-1.9.1.min.js"></script>
+						<script type="text/javascript" src="/public/plugins/layer-v3.1.0/layer.js"></script>
+						<script type="text/javascript">
+							$('.submit').click(function(){
+								var data = $('#message').serialize();
+									
+								$.post('{:url("index/Lists/gbook_submit")}',data,function(data){
+									if(data.code == 1){
+										layer.msg(data.msg,{icon:1,time:1000});
+									}else{
+										$('#token').val(data.token);
+										layer.msg(data.msg,{icon:5,time:1000});
+									}
+
+								})
+
+								
+
+
+								return false;
+
+							})
+
+						</script>
+
+
+
+						<!-- 移动端二维码 -->
+						<div class="mobile_qrcode box1" style="display: none;">
+							<img src="{$web_config.web_attr_15}" >
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!-- 底部 -->
+		{include file="footer"}
+		<!--底部结束-->
+		<script src="__INDEX__/js/swiper/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var mySwiper = new Swiper ('.swiper', {
+				direction: 'horizontal', // 垂直切换选项
+				loop: true, // 循环模式选项
+				autoplay: true,
+				
+				// 如果需要分页器
+				pagination: {
+				  el: '.swiper-pagination',
+				},
+				
+				// 如果需要前进后退按钮
+				navigation: {
+				  nextEl: '.swiper-button-next',
+				  prevEl: '.swiper-button-prev',
+				},
+			})
+			
+			var myMobileSwiper = new Swiper ('.mobile_swiper', {
+				direction: 'horizontal', // 垂直切换选项
+				loop: true, // 循环模式选项
+				autoplay: true,
+				
+				// 如果需要分页器
+				pagination: {
+				  el: '.swiper-pagination',
+				},
+			})
+		
+		</script>
+

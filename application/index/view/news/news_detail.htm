@@ -1,0 +1,30 @@
+{include file="header"}
+		
+
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="/">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+					<h3>{$cate.title}</h3>
+					<p class="release_time">发布时间：{:date('Y-m-d',$cate.add_time)}</p>
+					<div class="desc">
+						{:htmlspecialchars_decode($cate.content)}
+					</div>
+					<!-- 上一页、下一页 -->
+					<div class="changepage">
+						{notempty name="$cate.prev"}
+						<a href="/news_detail?aid={$cate.prev.aid}">上一页：<span>{$cate.prev.title}</span></a>
+						{/notempty}
+						{notempty name="$cate.next"}
+						<a href="/news_detail?aid={$cate.next.aid}">下一页：<span>{$cate.next.title}</span></a>
+						{/notempty}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		{include file="footer"}

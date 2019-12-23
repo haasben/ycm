@@ -1,0 +1,124 @@
+{include file="header"}
+<link rel="stylesheet" type="text/css" href="__INDEX__/js/swiper/css/swiper.min.css"/>
+			<div class="inner">
+				<div class="top_title">
+					<h3>{$cate.typename}</h3>
+					<p>当前位置：
+						<a href="./">首页</a>&nbsp;>&nbsp;<span>{$cate.typename}</span>
+					</p>
+				</div>
+				<div class="content">
+					<h3 style="margin-bottom: 0px">{$cate.child.title}</h3>
+					<p style="text-align: center;font-size: 19px;margin-bottom: 25px;line-height: 40px;">{$cate.child.subtitle}</p>
+
+					<div class="desc">
+						<img src="{$cate.child.litpic}" >
+						
+						{:htmlspecialchars_decode($cate.child.content)}
+					</div>
+				</div>
+
+					<div class="swiper-container" id="pc_swiper">
+						<div class="swiper-wrapper">
+							{volist name="$cate.image" id="i"}
+							<div class="swiper-slide">
+								<div class='img' style="background-image: url({$i.litpic});"></div>
+								<div class="zs_title">
+									{$i.title}
+								</div>
+							</div>
+							{/volist}
+							
+						</div>
+				  </div>
+
+				  
+				  <div class="swiper-container" id="mobile_swiper">
+						<div class="swiper-wrapper">
+							{volist name="$cate.image" id="i"}
+							<div class="swiper-slide">
+								<div class='img' style="background-image: url({$i.litpic});"></div>
+								<div class="zs_title">
+									{$i.title}
+								</div>
+							</div>
+							{/volist}
+						</div>
+				  </div>
+
+
+			</div>
+		</div>
+		
+
+		<!-- 底部 -->
+{include file="footer"}
+
+<script src="__INDEX__/js/swiper/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+			function zs_swiper(num){
+				effect = 0;
+				console.log(num)
+				var swiper = new Swiper('#pc_swiper', {
+					loop: true,
+					speed: 1000,
+					slidesPerView: num,
+					spaceBetween: 20,
+					centeredSlides : true,
+					watchSlidesProgress : true,
+					autoplay: true,
+					on: {
+						setTranslate: function(){
+							slides = this.slides
+							for(i=0; i< slides.length; i++){
+								slide = slides.eq(i)
+								progress = slides[i].progress
+								//slide.html(progress.toFixed(2)); 看清楚progress是怎么变化的
+									slide.css({'opacity': '','background': ''});slide.transform('');//清除样式
+									
+									if(effect == 1){
+										slide.transform('scale('+(1 - Math.abs(progress)/8)+')');  
+									}else if(effect == 2){
+										slide.css('opacity',(1-Math.abs(progress)/6));
+										slide.transform('translate3d(0,'+ Math.abs(progress)*20+'px, 0)');  
+									}
+									else if(effect == 3){
+										slide.transform('rotate('+ progress*30+'deg)');  
+									}else if(effect == 4){
+										slide.css('background','rgba('+ (255 - Math.abs(progress)*20) +','+ (127 + progress*32) +',' + Math.abs(progress)*64 + ')');
+									}
+								}	
+						},
+						setTransition: function(transition) {
+							for (var i = 0; i < this.slides.length; i++) {
+								var slide = this.slides.eq(i)
+								slide.transition(transition);
+							}
+						},
+					},
+				});
+			}
+			
+			function slider_num(){
+				let devW = document.documentElement.clientWidth;
+				console.log(devW)
+				 let num = devW < 1200 ? 3 : 5;
+				 zs_swiper(num)
+			}
+			
+			$(function(){
+				slider_num();
+			})
+			$(window).resize(function(){
+				slider_num();
+			})
+			
+			
+			var swiper = new Swiper('#mobile_swiper', {
+				direction: 'horizontal', // 垂直切换选项
+				loop: true,
+				speed: 1000,
+				autoplay: true,
+			});
+
+		</script>
